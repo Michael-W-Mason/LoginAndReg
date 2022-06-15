@@ -40,8 +40,13 @@ public class HomeController : Controller
     }
 
     [HttpGet("/success")]
-    public ViewResult Success()
+    public IActionResult Success()
     {
+        int? Id = HttpContext.Session.GetInt32("UserId");
+        if (Id == null)
+        {
+            return RedirectToAction("Home");
+        }
         return View("Success");
     }
 
